@@ -40,9 +40,6 @@
        path: "asd"
        state: directory
        mode: "0644"
-       #   - name: User module.
-       #     user:
-       #  name: tomcat
          #        shell: /sbin/nologin
          #  comment: "Only for tomcat"
    - name: File module.
