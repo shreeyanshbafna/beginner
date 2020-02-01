@@ -1,0 +1,76 @@
+- hosts: all
+  vars:
+   - site :  https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.50/bin/apache-tomcat-8.5.50.tar.gz
+     tomcat: apache-tomcat-8.5.50
+     a_b : httpd
+     c_d : directory
+  tasks:
+   - name: create a file
+     file: 
+       path: "/shree.txt"
+       state: touch
+   - name: copy file
+     copy:  
+       dest: "/app.txt"
+       content: toy
+   - name: httpd
+     yum:
+       name: "{{ a_b }}"
+       name: mysql
+       name: java
+       state: latest
+   - name: service start
+     service:
+       name: httpd
+       state: started
+   - name: copy content
+     copy:
+       dest: /var/www/html/index.html
+       content: "welcome"
+   - name: folder
+     file:
+       path: "shree"
+       state: "{{ c_d }}"
+       owner: root
+       group: root
+       mode: "755"
+   - name: local folder
+     local_action:
+       module: file
+       path: "asd"
+       state: directory
+       mode: "0644"
+       #   - name: User module.
+       #     user:
+       #  name: tomcat
+         #        shell: /sbin/nologin
+         #  comment: "Only for tomcat"
+   - name: File module.
+     file:
+         name: /opt/tomcat
+         state: directory
+         owner: tomcat
+         group: tomcat
+         recurse: yes
+         mode: '0755'
+   - name: Download tomcat.
+     get_url:
+            url: "{{ site }}"
+            dest: /opt/
+#   - name: Extracting archive file.
+#     unarchive:
+#               src: /opt/ "{{ tomcat }}".tar.gz
+#              dest: /opt/tomcat/
+#               remote_src: yes
+         #   - name: Starting tomcat server.
+     #      shell: /opt/tomcat/ "{{ tomcat }}"/bin/startup.sh
+   - name: firewall
+     firewalld:
+       service: httpd
+       permanent: yes
+       state: enabled
+       immediate: yes
+   
+
+
+
