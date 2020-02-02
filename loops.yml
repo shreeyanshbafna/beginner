@@ -1,0 +1,14 @@
+---
+ - name: Installtion of multiple packages
+   hosts: all
+   gather_facts: no
+   become: yes
+   tasks:
+     - name: Multiple packages
+       yum:
+         name: "{{ item.package }}"
+         state: present
+       loop:
+         - package: httpd
+         - package: wget
+         - package: vsftpd

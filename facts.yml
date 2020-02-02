@@ -1,0 +1,19 @@
+---
+ - name: extracting details
+   hosts: all
+   become: yes
+   gather_facts: yes
+   tasks:
+     - name: fact
+       debug: 
+         var: ansible_facts
+     - name: msg
+       debug:
+         msg: "{{ ansible_facts.kernel }}" 
+        
+     - name: msg
+       debug:
+         msg: "{{ ansible_facts.fqdn }}" 
+     - name: msg
+       debug:
+         msg:custom fact {{ ansible_facts ['kernel'] }}

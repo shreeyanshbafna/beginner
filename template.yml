@@ -1,0 +1,22 @@
+---
+ - name: Template
+   hosts: all
+   gather_facts: no
+   become: yes
+   tasks:
+     - name: httpd
+       yum:
+         name: httpd
+         state: present
+     - name: firewalld
+       service:
+           name: httpd
+           state: restarted
+           enabled: yes
+     - name: template
+       template:
+          src: ./file.j2
+          dest: /var/www/html/index.html
+
+         
+

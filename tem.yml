@@ -1,0 +1,13 @@
+---
+ - name: Template
+   hosts: all
+   gather_facts: no
+   become: yes
+   tasks:
+     - name: template
+       template:
+          src: ./file.j2
+          dest: /var/www/html/index.html
+
+         
+
