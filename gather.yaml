@@ -1,0 +1,7 @@
+- hosts: local
+  tasks: 
+  
+    - ec2_instance_info:
+      register: ec2_sd
+    - debug:
+        var: ec2_sd.stdout_lines
